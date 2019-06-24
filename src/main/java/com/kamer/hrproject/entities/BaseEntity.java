@@ -1,12 +1,12 @@
 package com.kamer.hrproject.entities;
 
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 @MappedSuperclass
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -18,7 +18,8 @@ class BaseEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Setter(AccessLevel.NONE)
     private Long id;
-    private Boolean isDeleted;
+    private Boolean isDeleted = false;
+    @CreationTimestamp
     private Timestamp createDate;
 
 }
