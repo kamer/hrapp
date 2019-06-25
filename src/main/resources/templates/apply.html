@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>HR Application</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .card {
+            max-width: 70%;
+            margin: 0 auto;
+            margin-top: 5px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="/">HR Application</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Jobs</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Admin Login
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <form>
+                        <input type="text">
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="alert alert-success" role="alert" th:if="${status == 'success'}">
+    You application has been sent successfully!
+</div>
+<div class="alert alert-error" role="alert" th:if="${status == 'fail'}">
+    Your application can't be sent!
+</div>
+
+<div class="card">
+    <form th:action="@{'/apply/' + ${job.id}}" th:object="${application}" method="post">
+        <div class="form-group row">
+            <label class="col-4 col-form-label">Position </label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-address-card"></i>
+                        </div>
+                    </div>
+                    <input th:value="${job.jobTitle}" type="text" class="form-control" required="required" readonly>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-4 col-form-label" >Full Name</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-address-card"></i>
+                        </div>
+                    </div>
+                    <input type="text" class="form-control" required="required" th:field="*{name}">
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-4 col-form-label">Email</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-at"></i>
+                        </div>
+                    </div>
+                    <input type="email" class="form-control" required="required" th:field="*{email}">
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-4 col-form-label">Phone</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-phone"></i>
+                        </div>
+                    </div>
+                    <input type="tel" class="form-control" required="required" th:field="*{phone}">
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label  class="col-4 col-form-label">Address</label>
+            <div class="col-8">
+                <textarea cols="40" rows="3" class="form-control" required="required" th:field="*{address}"></textarea>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label  class="col-4 col-form-label">Thoughts</label>
+            <div class="col-8">
+                <textarea cols="40" rows="3" class="form-control" required="required" th:field="*{thoughts}"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label  class="col-4 col-form-label">Resume</label>
+            <div class="col-8">
+                <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="offset-4 col-8">
+                <button name="submit" type="submit" class="btn btn-primary">Apply</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
