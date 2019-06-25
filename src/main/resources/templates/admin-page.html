@@ -55,7 +55,6 @@
     <h2 class="list-group-item list-group-item-action job-button active text-center">Applications</h2>
     <a href="#" class="list-group-item list-group-item-action job-button" th:each="jobApplication : ${jobApplications}" th:text="${jobApplication.name + ' - ' + jobApplication.job.jobTitle }" th:href="@{'/admin/applications/' + ${jobApplication.id}}"></a>
     <p href="#" class="list-group-item list-group-item-action job-button" th:if="jobApplications != 0" th:text="${'No Applications Yet.'}"></p>
-
 </div>
 
 

@@ -91,6 +91,7 @@
 <div class="list-group jobs-container">
     <h2 class="list-group-item list-group-item-action job-button active text-center">Available Positions</h2>
     <a href="#" class="list-group-item list-group-item-action job-button" th:each="job : ${jobs}" th:text="${job.jobTitle}" th:href="@{'/jobs/' + ${job.id}}"></a>
+    <p href="#" class="list-group-item list-group-item-action job-button" th:if="${#lists.isEmpty(jobs)}" th:text="${'No Available Positions.'}"></p>
 </div>
 </div>
 </body>

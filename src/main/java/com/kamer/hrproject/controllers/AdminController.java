@@ -105,4 +105,22 @@ public class AdminController {
         }
     }
 
+    @DeleteMapping("/jobs/{id}")
+    public ModelAndView seeAllJobListings(@PathVariable("id") Long id) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect:/admin/jobs");
+        try {
+            jobService.deleteJob(id);
+            List<Job> jobList = jobService.getAllJobs();
+            modelAndView.addObject("jobs", jobList);
+            modelAndView.setStatus(HttpStatus.OK);
+        } catch (NotFoundException e) {
+            modelAndView.setStatus(HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            modelAndView.setStatus(HttpStatus.SERVICE_UNAVAILABLE);
+        } finally {
+            return modelAndView;
+        }
+    }
+
 }

@@ -54,7 +54,15 @@
 <div>
 <div class="list-group jobs-container">
     <h2 class="list-group-item list-group-item-action job-button active text-center">All Listed Positions</h2>
-    <a href="#" class="list-group-item list-group-item-action job-button" th:each="job : ${jobs}" th:text="${job.jobTitle}" th:href="@{'/jobs/' + ${job.id}}"></a>
+    <div th:each="job : ${jobs}" class="list-group-item list-group-item-action job-button">
+        <a th:text="${job.jobTitle}" th:href="@{'/jobs/' + ${job.id}}"></a>
+        <form action="#" th:action="@{'/admin/jobs/' + ${job.id}}" th:method="delete" >
+            <input type="hidden" name="_method" value="delete" />
+            <button type="submit" class="badge badge-danger">Remove</button>
+        </form>
+    </div>
+    <p href="#" class="list-group-item list-group-item-action job-button" th:if="${#lists.isEmpty(jobs)}" th:text="${'No Jobs.'}"></p>
+    
 </div>
 </div>
 </body>
