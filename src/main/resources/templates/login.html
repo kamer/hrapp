@@ -9,20 +9,19 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
     <style>
         .card {
-            max-width: 70%;
+            max-width: 50%;
             margin: 0 auto;
             margin-top: 5px;
-            padding: 20px;
+            padding: 10px;
         }
     </style>
 </head>
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="/admin">HR Application</a>
+    <a class="navbar-brand" href="/">HR Application</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -32,61 +31,16 @@
                 <a class="nav-link" href="/">Jobs</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/admin">Applications</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/admin/add-job">Add Job</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/perform_logout">Log out</a>
+                <a class="nav-link" href="/login">Admin Login</a>
             </li>
         </ul>
     </div>
 </nav>
 
-<div class="alert alert-success" role="alert" th:if="${status == 'success'}">
-    You job has been created successfully!
-</div>
-<div class="alert alert-error" role="alert" th:if="${status == 'fail'}">
-    Your job could not be created!
-</div>
-
 <div class="card">
-<form th:action="@{'/admin/add-job'}" th:object="${job}" method="post">
+<form name='f' action="/login" method='POST'>
     <div class="form-group row">
-        <label for="" class="col-4 col-form-label">Title</label>
-        <div class="col-8">
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <i class="fa fa-file-text"></i>
-                    </div>
-                </div>
-                <input type="text" class="form-control" required="required" th:field="*{jobTitle}">
-            </div>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="" class="col-4 col-form-label">Description</label>
-        <div class="col-8">
-            <textarea cols="40" rows="5" required="required" class="form-control" th:field="*{jobDescription}"></textarea>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="" class="col-4 col-form-label">Quota</label>
-        <div class="col-8">
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <i class="fa fa-user-o"></i>
-                    </div>
-                </div>
-                <input id="" name="" type="number" class="form-control" th:field="*{quota}">
-            </div>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label class="col-4 col-form-label">Last Application</label>
+        <label for="username" class="col-4 col-form-label">Username</label>
         <div class="col-8">
             <div class="input-group">
                 <div class="input-group-prepend">
@@ -94,7 +48,20 @@
                         <i class="fa fa-address-card"></i>
                     </div>
                 </div>
-                <input type="date" class="form-control" th:field="*{lastApplicationDate}">
+                <input id="username" name="username" type="text" class="form-control" required="required">
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="password" class="col-4 col-form-label">Password</label>
+        <div class="col-8">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="fa fa-asterisk"></i>
+                    </div>
+                </div>
+                <input id="password" name="password" type="password" class="form-control" required="required">
             </div>
         </div>
     </div>

@@ -3,6 +3,7 @@ package com.kamer.hrproject.controllers;
 import com.kamer.hrproject.entities.Application;
 import com.kamer.hrproject.entities.Job;
 import com.kamer.hrproject.services.ApplicationService;
+import com.kamer.hrproject.services.FileUploadService;
 import com.kamer.hrproject.services.JobService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ public class AdminController {
 
     @Autowired
     ApplicationService applicationService;
+
+    @Autowired
+    FileUploadService fileUploadService;
 
     @GetMapping("")
     public ModelAndView getAllApplications() {
@@ -77,7 +81,10 @@ public class AdminController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("application-details");
         try {
-            modelAndView.addObject("jobApplication", applicationService.getApplication(id));
+            Application application = applicationService.getApplication(id);
+            String resumeURL = fileUploadService.serveFile(application.getResume());
+            modelAndView.addObject("jobApplication", application);
+            modelAndView.addObject("resumeURL", resumeURL);
             modelAndView.setStatus(HttpStatus.OK);
         } catch (NotFoundException e) {
             modelAndView.setStatus(HttpStatus.NOT_FOUND);
@@ -106,7 +113,7 @@ public class AdminController {
     }
 
     @DeleteMapping("/jobs/{id}")
-    public ModelAndView seeAllJobListings(@PathVariable("id") Long id) {
+    public ModelAndView deleteJob(@PathVariable("id") Long id) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/admin/jobs");
         try {

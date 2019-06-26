@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
+import java.sql.Blob;
 
 @Entity
 @Getter
@@ -19,7 +20,7 @@ public class Application extends BaseEntity {
     private String phone;
     private String address;
     private String thoughts;
-    private byte[] resume;
+    private Blob resume;
     @ManyToOne(fetch = FetchType.EAGER)
     @NonNull
     private Job job;
